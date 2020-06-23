@@ -1,0 +1,63 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model List<Gathering>
+<style>
+    .logout{
+        padding-left: 800px;
+    }
+</style>
+
+
+<h4>Welcome, @ViewBag.User.name <a class="logout text-dark" href="/logout">Logout</a></h4>
+
+
+
+<table class="table table-bordered table-dark">
+    <thead class="thead">
+        <tr>
+            <th scope="col">Activity</th>
+            <th scope="col">Date and Time</th>
+            <th scope="col">Duration (in hrs)</th>
+            <th scope="col">Coordinator</th>
+            <th scope="col">Participants</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Gathering m in Model)
+        {
+            <tr>
+                <td><a class="name"href="/activity/@m.gatheringID">@m.title </a></td>
+                <td class="date">@String.Format("{0:d}", m.date) @m.time.ToString("hh:mm tt") </td>
+                <td> @m.duration hours</td>
+                <td>@m.coordinator.name</td>
+                <td>@m.participants.Count</td>
+                <td>
+                    @if(ViewBag.User.userID == m.coordinator.userID)
+                    {
+                        <a class="btn btn-danger btn-sm" href="/@m.gatheringID/delete">Delete</a>
+                    }
+                    else
+                    {
+                        if(m.participants.Any( w => w.userID == ViewBag.User.userID))
+                        {
+                            <a class="btn btn-warning btn-sm" href="/@m.gatheringID/unrsvp" >Un-Join</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-primary btn-sm" href="/@m.gatheringID/rsvp">Join</a>
+                        }
+                    }
+                </td>
+
+
+            </tr>
+        }
+        
+    </tbody>
+    
+</table>
+<div class="text-center">
+    <a href="/new" class="btn btn-primary">Add New Activity</a>
+</div>

@@ -1,0 +1,77 @@
+@{
+    ViewData["Title"] = "New Page";
+}
+@model Gathering
+<style>
+.main{
+        margin-left: 380px;
+    }
+.logout{
+    padding-left: 1000px;
+}
+.jumbotron{
+        background-image: url("/img/park.png");
+        background-size: cover;
+
+    }
+h1{
+    font-size: 50px;
+    text-decoration: underline;
+    font-weight: 500;
+}
+</style>
+<a class="logout text-dark" href="/logout">Logout</a>
+
+
+
+
+
+<div class="jumbotron text-center text-danger">
+    <h1>Post an Activity</h1>
+
+</div>
+    <div class="main">
+        <div class= "card" style="width: 23rem">
+            <div class="card-header bg-primary text-white">Post an Activity</div>
+                <div class="card-body">
+                    <form asp-action="PostEvent" asp-controller="Home" method="post" class="form-group">
+                        <label asp-for="title">Event Title:</label>
+                        <span class="text-danger" asp-validation-for="title"></span>
+                        <input class="form-control" asp-for="title">
+
+                        <label asp-for="date">Date:</label>
+                        <span class="text-danger" asp-validation-for="date"></span>
+                        <input class="form-control" asp-for="date">
+
+                        <label asp-for="time">Time:</label>  
+                        <span class="text-danger" asp-validation-for="time"></span>
+                        <input class="form-control" asp-for="time">
+
+                        <label asp-for="duration">Duration(in hours):</label>
+                        <span class="text-danger" asp-validation-for="duration"></span>
+                        <input class="form-control" asp-for="duration">
+                            <select name="duration">
+                                <option value="hours">Hours</option>
+                                <option value="minutes">Minutes</option>
+                                <option value="hours">Hours</option>
+                                <option value="days">Days</option>
+                            </select></br>
+        
+
+                        <label asp-for="description">Description:</label>
+                        <span class="text-danger" asp-validation-for="description"></span>
+                        <input class="form-control" asp-for="description">
+
+                        <div class="text-center">
+
+                            <input value="Post" class="btn btn-danger" type="submit">  
+
+                        </div>
+        
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </div>

@@ -1,0 +1,79 @@
+@{
+    ViewData["Title"] = "Event Page";
+}
+@model Gathering
+<style>
+    .main{
+        padding-left: 370px;
+    }
+    .logout{
+        padding-left: 1000px;
+    }
+    .jumbotron{
+        background-image: url("/img/park.png");
+        background-size: cover;
+
+    }
+    h1{
+        font-size: 50px;
+        text-decoration: underline;
+        font-weight: 500;
+    }
+</style>
+<h4>Welcome, @ViewBag.User.name <a class="logout text-dark" href="/logout">Logout</a></h4>
+
+
+<div class="jumbotron text-center text-danger">
+    <h1>@Model.title</h1>
+     @if(ViewBag.User.userID == @Model.coordinator.userID)
+                    {
+                        <a class="btn btn-danger btn-sm" href="/@Model.gatheringID/delete">Delete</a>
+                    }
+                    else
+                    {
+                        
+                            if(@Model.participants.Any( w => w.userID == ViewBag.User.userID))
+                            {
+                                <a class="btn btn-warning btn-sm" href="/@Model.gatheringID/unrsvp">Un-Join</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-primary btn-sm" href="/@Model.gatheringID/rsvp">Join</a>
+                            }
+                    
+                    }
+
+
+</div>
+<div class="main">
+    <div class="card"style="width: 23rem;">
+        <div class="card-header text-white bg-danger">
+            @Model.title
+        </div>
+        <div class="card-body ">
+            <p>Date: @String.Format("{0:D}", Model.date) @Model.time.ToString("hh:mm tt")</p>
+            <p>Coordinator: @Model.coordinator.name</p>
+            <p>Duration: @Model.duration hours</p>
+            <p>Description: @Model.description </p>
+            <p>Participants: </p>
+            @foreach(Association a in @Model.participants)
+            {
+                @if(a.attendee.userID == ViewBag.User.userID)
+                {
+                    <li>You are going to this activity!</li>
+                
+    
+                }
+                else{
+                    <li>@a.attendee.name</li>
+                }
+                
+                
+            }
+
+        </div>
+    </div>
+</div>
+
+
+

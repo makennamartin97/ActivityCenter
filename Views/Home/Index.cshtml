@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Login/Register";
+}
+<style>
+    h1{
+        margin-bottom: 48px;
+    }
+    .jumbotron{
+        background-image: url("/img/park2.png");
+        background-size: cover;
+
+    }
+    
+</style>
+
+<div class="back jumbotron bg-dark text-white">
+    <h1>Dojo Activity Center</h1>
+    <div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6 d-flex justify-content-center">
+      <partial name="LoginPartial" />
+    </div>
+    <div class="col-sm-6 d-flex justify-content-center">
+      
+      <partial name="RegistrationPartial" />
+
+    </div>
+  </div>
+</div>

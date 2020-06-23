@@ -1,0 +1,27 @@
+@model LoginUser
+<style>
+    .card{
+        display: inline-block;
+    }
+    
+</style>
+
+<div class="card" style="width: 18rem;height: 213px;">
+    
+    <form asp-action="Login" asp-controller="Home" method="post" >
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <label class="text-dark" asp-for="loginemail">Email:</label>
+                <span class="text-danger" asp-validation-for="loginemail"></span></br>
+                <input asp-for="loginemail">
+
+            </li>
+            <li class="list-group-item">
+                <label class="text-dark" asp-for="loginpassword">Password:</label>
+                <span class="text-danger" asp-validation-for="loginpassword"></span></br>
+                <input asp-for="loginpassword">
+            </li>
+            <input type="submit" class="btn btn-dark" value="Login">
+        </ul>
+    </form>
+</div>
